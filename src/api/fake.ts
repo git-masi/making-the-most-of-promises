@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 import type { UserId } from "../types";
 import { z } from "zod";
 
-const UserSchema = z.object({
+const FakeUserSchema = z.object({
   id: z.number(),
   name: z.string(),
   username: z.string(),
@@ -29,6 +29,8 @@ const UserSchema = z.object({
   }),
 });
 
+export type FakeUser = z.infer<typeof FakeUserSchema>;
+
 type PathParts = Array<string | number>;
 
 const paths = Object.freeze({
@@ -42,7 +44,7 @@ export async function fetchUser(userId: UserId) {
     throw new Error(`${req.status} - ${req.statusText}`);
   }
 
-  return UserSchema.parse(await req.json());
+  return FakeUserSchema.parse(await req.json());
 }
 
 function constructApiUrl(pathParts: PathParts) {

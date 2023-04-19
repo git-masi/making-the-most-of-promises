@@ -1,4 +1,5 @@
 import { fetchUser } from "../api/fake";
+import type { FakeUser } from "../api/fake";
 import type { User, UserId } from "../types";
 
 interface UserStore {
@@ -16,7 +17,7 @@ export async function promiseAllSettledFake(userStore: UserStore) {
     users.map(({ id }) => fetchUser(id))
   );
 
-  const fulfilled: any[] = [];
+  const fulfilled: FakeUser[] = [];
   const rejected: { userId: UserId; reason: string }[] = [];
 
   results.forEach((result, idx) => {
