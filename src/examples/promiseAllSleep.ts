@@ -1,9 +1,5 @@
 import { sleep } from "../api/sleep";
-import { User } from "../types";
-
-interface UserStore {
-  getUsers: () => Promise<User[]>;
-}
+import { UserStore } from "../types";
 
 export async function promiseAllSleep(userStore: UserStore) {
   const users = await userStore.getUsers();

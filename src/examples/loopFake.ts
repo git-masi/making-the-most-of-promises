@@ -1,9 +1,5 @@
 import { fetchUser } from "../api/fake";
-import type { User } from "../types";
-
-interface UserStore {
-  getUsers: () => Promise<User[]>;
-}
+import type { UserStore } from "../types";
 
 export async function loopFake(userStore: UserStore) {
   const users = await userStore.getUsers();

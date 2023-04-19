@@ -1,10 +1,6 @@
 import { fetchUser } from "../api/fake";
 import type { FakeUser } from "../api/fake";
-import type { User, UserId } from "../types";
-
-interface UserStore {
-  getUsers: () => Promise<User[]>;
-}
+import type { UserStore, UserId } from "../types";
 
 export async function promiseAllSettledFake(userStore: UserStore) {
   const users = await userStore.getUsers();
