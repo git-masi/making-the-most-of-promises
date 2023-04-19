@@ -1,4 +1,4 @@
-import { sleepErr } from "../api/sleep";
+import { rejectUserEleven } from "../errors";
 import { UserStore, UserId } from "../types";
 
 export async function promiseAllTryCatchSleep(userStore: UserStore) {
@@ -11,7 +11,7 @@ export async function promiseAllTryCatchSleep(userStore: UserStore) {
   const results = await Promise.all(
     users.map(async ({ id }) => {
       try {
-        return await sleepErr(id * 1000, id, isError);
+        return await rejectUserEleven(id * 1000, id);
       } catch (error) {
         if (error instanceof Error) {
           return {
@@ -46,8 +46,4 @@ export async function promiseAllTryCatchSleep(userStore: UserStore) {
   console.timeEnd("promiseAllTryCatchSleep total time");
 
   console.info("finished promiseAllTryCatchSleep");
-}
-
-function isError(val: any) {
-  return typeof val === "number" && val === 11;
 }

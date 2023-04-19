@@ -1,4 +1,4 @@
-import { sleepErr } from "../api/sleep";
+import { rejectUserEleven } from "../errors";
 import { UserStore, UserId } from "../types";
 
 export async function promiseAllSettledSleep(userStore: UserStore) {
@@ -9,7 +9,7 @@ export async function promiseAllSettledSleep(userStore: UserStore) {
   console.time("promiseAllSettledSleep total time");
 
   const results = await Promise.allSettled(
-    users.map(({ id }) => sleepErr<number>(id * 1000, id, isError))
+    users.map(({ id }) => rejectUserEleven(id * 1000, id))
   );
 
   console.info("results", results);
@@ -33,8 +33,4 @@ export async function promiseAllSettledSleep(userStore: UserStore) {
   console.timeEnd("promiseAllSettledSleep total time");
 
   console.info("finished promiseAllSettledSleep");
-}
-
-function isError(val: any) {
-  return typeof val === "number" && val === 11;
 }
