@@ -1,5 +1,5 @@
-export function sleep(time: number, val?: any) {
-  return new Promise((res) => {
+export function sleep<T>(time: number, val: T) {
+  return new Promise<T>((res) => {
     setTimeout(() => {
       res(val);
     }, time);
