@@ -22,7 +22,3 @@ export async function promiseAllSleep(userStore: UserStore) {
 
   console.info("finished promiseAllSleep");
 }
-
-function isError(val: any) {
-  return typeof val === "number" && val === 11;
-}
